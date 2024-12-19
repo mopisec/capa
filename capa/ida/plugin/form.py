@@ -548,6 +548,9 @@ class CapaExplorerForm(idaapi.PluginForm):
 
         if self.view_tabs.currentIndex() == 1 and self.view_rulegen_limit_features_by_ea.isChecked():
             return self.update_rulegen_tree_limit_features_to_selection(new_ea)
+        
+        if not idaapi.get_func(new_ea) or not idaapi.get_func(old_ea):
+            return
 
         if idaapi.get_func(new_ea) == idaapi.get_func(old_ea):
             # user navigated same function - ignore
